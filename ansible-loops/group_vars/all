@@ -1,0 +1,9 @@
+#Variables accessible by ALl the Hosts from the Inventory file
+# groups_vars/all should be file name exact
+#
+
+username:
+- user11
+- user12
+- user13
+- user14

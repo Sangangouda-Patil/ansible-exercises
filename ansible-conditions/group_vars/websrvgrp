@@ -1,0 +1,5 @@
+#Variables accessible by by webservgrp
+
+
+USRNM: websrvuser
+COMM: value fron group_vars/websrvgrp file

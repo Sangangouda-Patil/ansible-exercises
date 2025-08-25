@@ -1,0 +1,5 @@
+#Variables accessible by web02 host
+-
+
+USRNM: web02user
+COMM: value fron host_vars/web02 file

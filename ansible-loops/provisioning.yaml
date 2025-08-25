@@ -1,0 +1,58 @@
+---
+- name: Provisioning Server
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install chrony on CentOS
+      yum:
+        #
+        #item is fixed (exact) name for loops
+        #
+        name: "{{item}}"
+        state: present
+      when:
+        - ansible_distribution == "CentOS"
+      loop:
+        - ntp
+        - wget
+        - unzip
+        - zip
+        - git
+
+    - name: Install NTP on Ubuntu/Debian
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      when:
+        - ansible_distribution == "Ubuntu"
+      loop:
+        - ntp
+        - wget
+        - unzip
+        - zip
+        - git
+
+    - name: Ensure NTP service is started and enabled (CentOS)
+      service:
+        name: ntpd
+        state: started
+        enabled: yes
+      when:
+        - ansible_facts['os_family'] == "RedHat"
+
+    - name: Ensure NTP service is started and enabled (Ubuntu/Debian)
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when:
+        - ansible_facts['os_family'] == "Debian"
+
+    - name: Add users
+      user:
+          name: "{{item}}"
+          state: present
+          groups: devops
+      loop: "{{username}}"

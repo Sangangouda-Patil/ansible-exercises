@@ -1,0 +1,43 @@
+---
+- name: Install and configure NTP service based on OS (only if free RAM > 40%)
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: Install chrony on CentOS
+      yum:
+        name: chrony
+        state: present
+      when:
+        - ansible_facts['os_family'] == "CentOS"
+          # - (ansible_facts['memfree_mb'] | float / ansible_facts['memtotal_mb'] | float * 100) > 40
+
+    - name: Install NTP on Ubuntu/Debian
+      apt:
+        name: ntp
+        state: present
+        update_cache: yes
+      when:
+        - ansible_facts['os_family'] == "Ubuntu"
+          #- (ansible_facts['memfree_mb'] | float / ansible_facts['memtotal_mb'] | float * 100) > 40
+
+    - name: Ensure chrony service is started and enabled (CentOS)
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
+      when:
+        - ansible_facts['os_family'] == "CentOS"
+          #- (ansible_facts['memfree_mb'] | float / ansible_facts['memtotal_mb'] | float * 100) > 40
+
+    - name: Ensure NTP service is started and enabled (Ubuntu/Debian)
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when:
+        - ansible_facts['os_family'] == "Ubuntu"
+          #- (ansible_facts['memfree_mb'] | float / ansible_facts['memtotal_mb'] | float * 100) > 40
+
+   

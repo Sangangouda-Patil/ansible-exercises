@@ -1,0 +1,39 @@
+ubuntu@control:~/vprofile/exercise1$ cat inventory
+#
+#Writing inventory files
+#
+
+all:
+  hosts:
+    web01:
+#Private IP of instance
+      ansible_host: #PrivateIP
+      ansible_user: ec2-user
+      ansible_ssh_private_key_file: client-kp.pem
+
+    web02:
+      ansible_host: #PrivateIP
+#Private IP of instance
+      ansible_user: ec2-user
+      ansible_ssh_private_key_file: client-kp.pem
+
+    db01:
+      ansible_host: #PrivateIP
+#Private IP of instance
+      ansible_user: ec2-user
+      ansible_ssh_private_key_file: client-kp.pem #Private key name
+
+#Creating groups
+  children:
+    webservers:
+      hosts:
+        web01:
+        web02:
+    dbservers:
+      hosts:
+        db01:
+#Creating group of groups
+    dc_oregon:
+      children:
+        webservers:
+        dbservers:

@@ -1,0 +1,13 @@
+#Variables accessible by ALl the Hosts from the Inventory file
+# groups_vars/all should be file name exact
+#
+
+username:
+  - user11
+  - user12
+  - user13
+  - user14
+ntp0: 0.north-america.pool.ntp.org
+ntp1: 1.north-america.pool.ntp.org
+ntp2: 2.north-america.pool.ntp.org
+ntp3: 3.north-america.pool.ntp.org

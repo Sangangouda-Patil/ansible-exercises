@@ -1,0 +1,39 @@
+---
+#
+#Installing mariadb and creating a DB and user for that database
+#
+- name: DBserver setup
+  hosts: dbsrvgrp
+  become: yes
+  tasks:
+    - name: Installing MySQL server
+      yum:
+        name: mariadb-server
+        state: present
+
+    - name: Installing Python MySQL
+      yum:
+        name: python3-PyMySQL
+        state: present
+
+    - name: Start & Enable mariadb service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+
+#Creating Database
+    - name: Create a new database with name 'accounts'
+      mysql_db:
+        name: accounts
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock
+
+    - name: Create database user with name 'admin'
+      mysql_user:
+        name: admin
+        # Don't keep complicated password IRL :)
+        password: 12345
+        priv: '*.*:ALL,GRANT'
+        state: present
+        login_unix_socket: /var/lib/mysql/mysql.sock

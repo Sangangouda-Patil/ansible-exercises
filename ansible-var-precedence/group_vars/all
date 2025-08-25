@@ -1,0 +1,6 @@
+#Variables accessible by ALl the Hosts from the Inventory file
+# groups_vars/all should be file name exact
+#
+
+USRNM: globaluser
+COMM: value fron group_vars/all file

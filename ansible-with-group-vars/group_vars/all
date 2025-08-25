@@ -1,0 +1,19 @@
+#Variables accessible by ALl the Hosts from the Inventory file
+# groups_vars/all should be file name exact
+#
+# If the same variable is defined in multiple places, Ansible variable precedence rules apply.
+#Rough order (lowest → highest):
+
+# group_vars/all
+
+# group_vars/<group>
+
+# host_vars/<host>
+
+# Playbook vars
+
+# Extra vars (-e on CLI)
+
+dbname: accounts
+dbuser: testadmin
+dbpass: admin123

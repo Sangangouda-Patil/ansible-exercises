@@ -1,0 +1,37 @@
+- name: Webserver setup
+  hosts: websrvgrp
+  become: yes
+  tasks:
+    - name: Installing Apache httpd
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start & enable httpd service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Copy index files
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: "0644"
+        backup: yes #this will backup the old file with date..
+
+- name: Setup DBserver
+  hosts: dbsrvgrp
+  become: yes
+  tasks:
+    - name: Installing MySQL server
+      yum:
+        name: mariadb-server
+        state: present
+    - name: Start & Enable mariadb service
+      service:
+        name: mariadb
+        state: started
+        enabled: yes

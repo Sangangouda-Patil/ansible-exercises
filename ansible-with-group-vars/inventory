@@ -1,0 +1,27 @@
+#
+#Writing inventory files
+#
+
+#Private Ip addresses of target machines
+web01 anisible_host: 172.31.95.120
+web02 anisible_host: 172.31.89.249
+db01 anisible_host: 172.31.86.226
+
+#Creating groups
+[websrvgrp]
+web01
+web02
+
+#Dbserver group
+[dbsrvgrp]
+db01
+
+#Creating group of groups
+[dc_ohio:children]
+websrvgrp
+dbsrvgrp
+
+#Setting variables for Username and private_ssh_key
+[dc_ohio:vars]
+ansible_users=centos #Depends on the Os you choose 
+ansible_ssh_private_key_file=client-kp.pem

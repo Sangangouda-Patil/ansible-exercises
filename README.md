@@ -93,7 +93,7 @@ Each exercise builds on the previous one, covering important Ansible concepts li
 Along with Ansible, I’ve been building strong Linux fundamentals and Terraform Fundamentals .  
 👉 **[Check out my Linux Cheat Sheet here](https://github.com/Sangangouda-Patil/Linux-cheat-sheet)**
 
-👉 **[Check out my Linux Cheat Sheet here](https://github.com/Sangangouda-Patil/sangangoudapatil-terraform)**
+👉 **[Check out my Terraform Projects here](https://github.com/Sangangouda-Patil/sangangoudapatil-terraform)**
 
 ---
 
